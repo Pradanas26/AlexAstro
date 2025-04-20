@@ -1,0 +1,20 @@
+---
+import cv from '../data/cv.json';
+
+const { name, title, profile_summary } = cv;
+---
+
+<section style="text-align: center; padding: 5rem 1rem;">
+  <h1 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem;">
+    Ciao, I'm {name}.
+  </h1>
+  <h2 style="font-size: 1.25rem; color: gray; margin-bottom: 1rem;">
+    {title}
+  </h2>
+  <p style="font-size: 1rem; color: #555; margin-bottom: 2rem; max-width: 800px; margin-inline: auto;">
+    {profile_summary}
+  </p>
+  <a href="#projectes" style="background-color: black; color: white; padding: 0.75rem 1.5rem; border-radius: 999px; text-decoration: none;">
+    Veure projectes
+  </a>
+</section>

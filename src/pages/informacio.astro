@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Titol from '../components/Titol.astro';
+import cv from '../data/cv.json';
+
+const experiencia = cv.experience;
+---
+
+<Layout>
+  <Titol text="Experiència Professional" />
+
+  {experiencia.map(item => (
+    <section class="experiencia">
+      <h2>{item.position} - {item.company}</h2>
+      <h3>{item.location} ({item.duration})</h3>
+      <ul>
+        {item.responsibilities.map(res => (
+          <li>{res}</li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <!-- 🔧 Skills -->
+  <section class="skills">
+    <h2>Skills</h2>
+    <ul>
+      {cv.skills.map(skill => (
+        <li>{skill}</li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 🎓 Formació -->
+  <section class="formacio">
+    <h2>Formació</h2>
+    <ul>
+      {cv.education.map(edu => (
+        <li>
+          <strong>{edu.degree}</strong> – {edu.institution} ({edu.year})
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 🌐 Idiomes -->
+  <section class="idiomes">
+    <h2>Idiomes</h2>
+    <ul>
+      {cv.languages.map(lang => (
+        <li>{lang.language}: {lang.level}</li>
+      ))}
+    </ul>
+  </section>
+</Layout>
+
+<!-- Estils -->
+<style>
+  .experiencia {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-left: 4px solid #004488;
+    background-color: #f9f9f9;
+  }
+
+  .experiencia h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #004488;
+  }
+
+  .experiencia h3 {
+    margin: 0.2rem 0 0.5rem;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .experiencia ul {
+    padding-left: 1.2rem;
+  }
+
+  .experiencia li {
+    margin-bottom: 0.3rem;
+  }
+
+  .skills, .formacio, .idiomes {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #eef2f7;
+    border-left: 4px solid #004488;
+  }
+
+  .skills h2,
+  .formacio h2,
+  .idiomes h2 {
+    margin-top: 0;
+    color: #004488;
+  }
+
+  .skills ul,
+  .formacio ul,
+  .idiomes ul {
+    padding-left: 1.2rem;
+  }
+
+  .skills li,
+  .formacio li,
+  .idiomes li {
+    margin-bottom: 0.3rem;
+  }
+</style>

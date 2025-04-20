@@ -1,0 +1,21 @@
+---
+const { text, href } = Astro.props;
+---
+
+<a class="boto" href={href}>{text}</a>
+
+<style>
+  .boto {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #004488;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 1rem;
+  }
+
+  .boto:hover {
+    background-color: #0066aa;
+  }
+</style>

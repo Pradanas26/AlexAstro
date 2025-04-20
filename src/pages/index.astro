@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProjecteCard from '../components/ProjecteCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import cv from '../data/cv.json';
+
+const projectes = cv.projects.map(projecte => ({
+  ...projecte,
+  slug: projecte.name.toLowerCase().replace(/\s+/g, '-')
+}));
+---
+
+<Layout>
+  <Hero />
+
+  <section id="projectes" style="padding: 4rem 1rem; max-width: 1200px; margin: auto;">
+    <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">Projectes destacats</h2>
+    <p style="color: #666; margin-bottom: 2rem;">
+      Una selecció de projectes personals i professionals que he desenvolupat.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      {projectes.map(projecte => (
+        <ProjecteCard 
+          name={projecte.name}
+          description={projecte.description}
+          image={projecte.image}
+          slug={projecte.slug}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section id="escrits" style="padding: 4rem 1rem; max-width: 800px; margin: auto;">
+    <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">Escrits recents</h2>
+    <p style="color: #666; margin-bottom: 2rem;">
+      Articles i pensaments sobre desenvolupament, arquitectura i bones pràctiques.
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      {cv.blog_posts.map((post, i) => (
+        <BlogCard 
+          title={post.title}
+          summary={post.summary}
+          date={post.date}
+          slug={`post-${i}`}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

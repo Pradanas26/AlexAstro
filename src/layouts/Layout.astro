@@ -1,0 +1,22 @@
+---
+import '../styles/global.css';
+import Navegacio from '../components/Navegacio.astro';
+import Peu from '../components/Peu.astro';
+---
+
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Pradanas - Portfoli</title>
+  </head>
+  <body style="margin: 0; font-family: sans-serif; background-color: #fff;">
+    <Navegacio />
+
+    <main style="padding: 2rem;">
+      <slot />
+    </main>
+
+    <Peu />
+  </body>
+</html>

@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import cv from '../../data/cv.json';
+
+export async function getStaticPaths() {
+  const projectSlugs = cv.projects.map(p => ({
+    params: { slug: p.name.toLowerCase().replace(/\s+/g, '-') }
+  }));
+
+  const blogSlugs = cv.blog_posts.map((_, i) => ({
+    params: { slug: `post-${i}` }
+  }));
+
+  return [...projectSlugs, ...blogSlugs];
+}
+
+const { slug } = Astro.params;
+
+// Detectem si és projecte o escrit
+const projecte = cv.projects.find(p =>
+  p.name.toLowerCase().replace(/\s+/g, '-') === slug
+);
+
+const isBlog = slug.startsWith('post-');
+const index = parseInt(slug.replace('post-', ''));
+const post = isBlog ? cv.blog_posts[index] : null;
+
+// Si no hi ha coincidència, anem a 404
+if (!projecte && !post) {
+  throw Astro.redirect('/404');
+}
+---
+
+<Layout>
+  {projecte && (
+    <article style="max-width: 800px; margin: 4rem auto; padding: 0 1rem;">
+      <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">{projecte.name}</h1>
+      <img src={projecte.image} alt={projecte.name} style="width: 100%; margin-bottom: 1rem;" />
+      <p style="font-size: 1rem; color: #444; margin-bottom: 1rem;">{projecte.description}</p>
+
+      <!-- 🔥 FORÇAR 404 quan es clica -->
+      <a href="/404" style="color: blue; font-weight: bold;">Visita el projecte 🔗</a>
+    </article>
+  )}
+
+  {post && (
+    <article style="max-width: 800px; margin: 4rem auto; padding: 0 1rem;">
+      <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">{post.title}</h1>
+      <p style="color: #888; margin-bottom: 2rem;">{post.date}</p>
+      <p style="font-size: 1rem; line-height: 1.6; color: #444;">{post.summary}</p>
+    </article>
+  )}
+</Layout>

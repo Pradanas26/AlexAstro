@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Titol from '../components/Titol.astro';
+import cv from '../data/cv.json';
+
+const contactes = Object.entries(cv.contact).map(([clau, valor]) => {
+  let enllac = valor;
+
+  if (clau === 'email') enllac = `mailto:${valor}`;
+  else if (clau === 'phone') enllac = `tel:${valor}`;
+
+  return { clau, valor, enllac };
+});
+---
+
+<Layout>
+  <Titol text="Contacte" />
+
+  <ul class="contacte">
+    {contactes.map(c => (
+      <li>
+        <strong>{c.clau}:</strong>
+        <a href={c.enllac} target="_blank">{c.valor}</a>
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .contacte {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .contacte li {
+    margin-bottom: 0.5rem;
+  }
+
+  .contacte a {
+    text-decoration: none;
+    color: #004488;
+  }
+
+  .contacte a:hover {
+    text-decoration: underline;
+  }
+</style>

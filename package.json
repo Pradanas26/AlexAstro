@@ -1,0 +1,19 @@
+{
+  "name": "alexastro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.7.4"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^4.0.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.3"
+  }
+}

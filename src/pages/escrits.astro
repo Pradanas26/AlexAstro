@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Titol from '../components/Titol.astro';
+import BlogCard from '../components/BlogCard.astro';
+import cv from '../data/cv.json';
+---
+
+<Layout>
+  <section style="max-width: 800px; margin: 4rem auto; padding: 0 1rem;">
+    <Titol text="Tots els escrits" />
+
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      {cv.blog_posts.map((post, i) => (
+        <BlogCard 
+          title={post.title}
+          summary={post.summary}
+          date={post.date}
+          slug={`post-${i}`}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>
